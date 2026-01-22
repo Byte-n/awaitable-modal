@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "async-modal-render": [
+        "src"
+      ]
+    },
+    "lib": [
+      "dom",
+      "es5"
+    ]
+  },
+  "include": [
+    ".dumirc.ts",
+    "src"
+  ]
+}

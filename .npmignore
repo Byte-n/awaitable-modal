@@ -1,0 +1,69 @@
+# Source files
+src/
+docs/
+docs-dist/
+
+# Build configs
+.dumirc.ts
+.fatherrc.ts
+tsconfig.json
+
+# Linting configs
+.eslintrc.js
+.prettierrc.js
+.prettierignore
+.editorconfig
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Husky
+.husky/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Lock files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+test/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build artifacts (keep only dist/)
+*.tsbuildinfo

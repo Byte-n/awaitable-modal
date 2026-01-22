@@ -1,0 +1,101 @@
+{
+  "name": "async-modal-render",
+  "version": "0.0.1",
+  "description": "A lightweight library that promisifies React modal operations, allowing elegant handling of modal interactions using async/await syntax",
+  "keywords": [
+    "react",
+    "modal",
+    "promise",
+    "async",
+    "await",
+    "dialog",
+    "popup",
+    "promisify",
+    "awaitable",
+    "typescript"
+  ],
+  "homepage": "https://github.com/Byte-n/async-modal-render#readme",
+  "bugs": {
+    "url": "https://github.com/Byte-n/async-modal-render/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Byte-n/async-modal-render"
+  },
+  "license": "MIT",
+  "author": "dancingbytes@qq.com",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "father build",
+    "build:watch": "father dev",
+    "deploy": "gh-pages -d docs-dist",
+    "dev": " dumi dev",
+    "docs:build": "dumi build",
+    "docs:preview": "dumi preview",
+    "doctor": "father doctor",
+    "lint": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepare": "husky install && dumi setup",
+    "prepublishOnly": "father doctor && npm run build",
+    "start": "npm run dev"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
+    "@umijs/lint": "^4.0.0",
+    "dumi": "^2.4.13",
+    "@byte.n/dumi-theme-antd": "^0.0.1",
+    "eslint": "^8.23.0",
+    "father": "^4.1.0",
+    "gh-pages": "^6.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3.0.0",
+    "prettier-plugin-packagejson": "^2.2.18",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
