@@ -60,6 +60,10 @@ export default defineConfig({
         details: '支持 React 16+ 版本，完美兼容 Hook 和现代 React 特性',
       },
       {
+        title: '自动化测试',
+        details: '提供完善的 Vitest 浏览器模式测试用例，覆盖 Hook、Context 和 HOC 等核心功能，确保库的稳定性',
+      },
+      {
         title: '灵活组件化',
         details: '可将任意 React 组件转换为异步模态框，高度灵活可定制',
       },

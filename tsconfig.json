@@ -4,8 +4,10 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "moduleResolution": "bundler",
     "jsx": "react",
     "baseUrl": "./",
+    "target": "ES2015",
     "paths": {
       "@@/*": [
         ".dumi/tmp/*"
@@ -16,7 +18,7 @@
     },
     "lib": [
       "dom",
-      "es5"
+      "es5",
     ]
   },
   "include": [

@@ -1,5 +1,20 @@
 # 更新日志
 
+## 0.0.3
+
+`2026-01-23`
+
+### 测试完善
+
+- 为所有核心 API（`asyncModalRender`、`useAsyncModalRender`、`AsyncModalRenderContext`、`withAsyncModalPropsMapper`）添加了完整的自动化测试用例
+- 使用 Vitest 浏览器模式进行真实环境测试，确保组件渲染与交互逻辑正确
+- 覆盖了成功、取消、错误边界等多种业务场景
+
+### 稳定性提升
+
+- 修复了 `AsyncModalRenderContext` 在 Provider 外部调用时的错误边界处理逻辑
+- 优化了测试环境下的 React 根节点挂载与卸载逻辑
+
 ## 0.0.2
 
 `2026-01-23`
