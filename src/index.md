@@ -14,7 +14,7 @@
 
 使用 `useAsyncModalRender` Hook 在组件内管理弹窗。
 
-<code src="./demo/useAsyncModalRender.tsx"></code>
+<code src="./demo/useAsyncModal.tsx"></code>
 
 ### Context 使用 - AsyncModalRenderProvider
 
