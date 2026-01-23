@@ -22,7 +22,7 @@ export function asyncModalRender<D extends AsyncModalProps>(
   if (!realContainer) {
     realContainer = document.createElement('div');
     document.body.appendChild(realContainer);
-    uninstallEffect = () => container!.remove();
+    uninstallEffect = () => realContainer!.remove();
   }
   const uninstall = staticRender(dom, realContainer);
   const closeFunc = () => {

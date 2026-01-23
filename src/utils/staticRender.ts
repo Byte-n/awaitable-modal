@@ -1,51 +1,70 @@
-import * as ReactDOM from 'react-dom'
-import * as React from 'react'
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-// 检测是否支持 React 18+ 的 createRoot API
-const supportsCreateRoot = typeof (ReactDOM as any).createRoot === 'function'
+/**
+ * 安全地获取 createRoot 函数
+ * 兼容处理：某些环境下从 'react-dom' 获取，某些需要从 'react-dom/client' 获取
+ */
+function getCreateRoot() {
+  if (typeof (ReactDOM as any).createRoot === 'function') {
+    return (ReactDOM as any).createRoot;
+  }
+
+  try {
+    const client = require('react-dom/client');
+    if (client && typeof client.createRoot === 'function') {
+      return client.createRoot;
+    }
+  } catch (e) {
+    // 忽略错误
+  }
+
+  return null;
+}
+
+const createRootFn = getCreateRoot();
 
 /**
  * 挂载 React 元素到指定容器，并返回卸载函数
- * @param element - 要挂载的 React 元素
- * @param container - DOM 容器元素
- * @returns 卸载函数，调用后会卸载组件并清理资源
  */
-export function staticRender (
+export function staticRender(
   element: React.ReactElement,
   container: Element,
 ): () => void {
 
-  if (supportsCreateRoot) {
-    // React 18+
-    const createRoot = (ReactDOM as any).createRoot
+  if (createRootFn) {
+    // React 18 & 19+ 逻辑
+    const existingRoot = (container as any).__reactCompatRoot;
+    let root;
 
-    // 检查容器是否已有 root 实例
-    const existingRoot = (container as any).__reactCompatRoot
-
-    let root
     if (existingRoot) {
-      root = existingRoot
+      root = existingRoot;
     } else {
-      // 创建新的 root 并缓存到容器上
-      root = createRoot(container);
-      (container as any).__reactCompatRoot = root
+      root = createRootFn(container);
+      (container as any).__reactCompatRoot = root;
     }
 
-    // 执行挂载
-    root.render(element)
+    root.render(element);
 
     return () => {
-      if ((container as any).__reactCompatRoot !== root) {
-        return
+      // 这里的清理逻辑需要防抖或微任务化，防止 React 18 内部渲染冲突
+      // 简单实现：
+      if ((container as any).__reactCompatRoot === root) {
+        root.unmount();
+        delete (container as any).__reactCompatRoot;
       }
-      root.unmount()
-      delete (container as any).__reactCompatRoot
-    }
+    };
   } else {
-    // React 16/17
-    (ReactDOM as any).render(element, container)
-    return () => {
-      (ReactDOM as any).unmountComponentAtNode(container)
+    // React 16/17 逻辑
+    // React 19 已经彻底删除了 ReactDOM.render
+    const legacyRender = (ReactDOM as any).render;
+    if (typeof legacyRender === 'function') {
+      legacyRender(element, container);
+      return () => {
+        (ReactDOM as any).unmountComponentAtNode(container);
+      };
+    } else {
+      throw new Error('当前 React 版本不支持 render 或 createRoot，请检查依赖。');
     }
   }
 }
