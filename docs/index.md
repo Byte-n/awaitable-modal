@@ -80,7 +80,7 @@ function AsyncModalWay () {
     }
   }
 
-  return <Button onClick={handleClick}>打开弹窗</Button>；
+  return <Button onClick={handleClick}>打开弹窗</Button>;
 }
 ```
 

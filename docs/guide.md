@@ -6,16 +6,12 @@
 
 使用你喜欢的包管理器安装 async-modal-render：
 
-```bash
-# npm
-npm install async-modal-render
-
-# pnpm
-pnpm add async-modal-render
-
-# yarn
-yarn add async-modal-render
-```
+<InstallDependencies 
+  npm='$ npm install async-modal-render' 
+  yarn='$ yarn add async-modal-render' 
+  pnpm='$ pnpm install async-modal-render' 
+/>
+</InstallDependencies>
 
 ## 基本使用
 

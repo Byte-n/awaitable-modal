@@ -1,18 +1,7 @@
-import React, { ComponentProps } from 'react'
+import React from 'react'
 import { staticRender } from './utils/staticRender'
 import { asyncModalRenderImp } from './utils/asyncModalRenderImp'
-
-export interface AsyncModalProps {
-  onOk?: (...args: any[]) => void;
-  onCancel?: (error?: any) => void;
-}
-
-
-export class AsyncModalRenderCancelError extends Error {
-  constructor () {
-    super('User cancel')
-  }
-}
+import type { AsyncModalProps, ComputeAsyncModalProps } from './types'
 
 /**
  * 直接将组件渲染到 container 元素下
@@ -20,15 +9,14 @@ export class AsyncModalRenderCancelError extends Error {
  * @param props 熟悉
  * @param container 挂载的容器
  */
-export function asyncModalRender<D extends AsyncModalProps> (
+export function asyncModalRender<D extends AsyncModalProps>(
   Comp: React.ComponentType<D>,
-  props: Omit<D, keyof AsyncModalProps> & Pick<D, keyof AsyncModalProps>,
+  props?: ComputeAsyncModalProps<D>,
   container?: Element,
 ) {
-  type PT = ComponentProps<typeof Comp>;
-  const [dom, promise] = asyncModalRenderImp<PT>(Comp, props ?? ({} as PT), {
+  const [dom, promise] = asyncModalRenderImp<D>(Comp, props ?? ({} as ComputeAsyncModalProps<D>), {
     onClose: () => closeFunc(),
-  })
+  });
   let uninstallEffect = () => {};
   let realContainer = container;
   if (!realContainer) {
@@ -39,7 +27,7 @@ export function asyncModalRender<D extends AsyncModalProps> (
   const uninstall = staticRender(dom, realContainer);
   const closeFunc = () => {
     uninstall();
-    uninstallEffect()
-  }
-  return promise
+    uninstallEffect();
+  };
+  return promise;
 }

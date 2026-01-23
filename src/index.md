@@ -1,4 +1,4 @@
-# async-modal-render
+# 使用手册
 
 以 Promise 的方式使用弹窗组件，支持多种使用方式，简化弹窗的异步交互逻辑。
 
@@ -22,18 +22,78 @@
 
 <code src="./demo/context.tsx"></code>
 
+### Props 转换
+
+默认的回调函数是 `onOk`、`onCancel`，这可能与现有的弹窗组件的回调不一致。这有两种处理方式：
+
+* 定义 `props` 符合 `AsyncModalProps` 类型的弹窗，并在内部调用现有的弹窗组件。相对于做一层 `props` 键名的转换
+* 使用内置的高阶函数 `withAsyncModalPropsMapper`，也是做了一层 `props` 键名的转换
+
+下面是 `withAsyncModalPropsMapper` 的使用：
+```tsx | pure
+import { withAsyncModalPropsMapper, ComputeAsyncModalProps } from 'async-modal-render'
+
+interface BusinessModalProps {
+  onClose: VoidFunction;
+  onFinished: (num: number) => void;
+  text: string;
+  num?: number;
+}
+function BusinessModal(_: BusinessModalProps) {
+  return <div />;
+}
+
+interface StandardModalProps {
+  onCancel: VoidFunction;
+  onOk: (num: number) => void;
+  text: string;
+  num?: number;
+}
+
+function StandardModal(_: StandardModalProps) {
+  return <div />;
+}
+
+async function go() {
+  const props: ComputeAsyncModalProps<StandardModalProps> = {
+    text: 'string',
+    num: 1,
+    onOk: (_: number) => void 0,
+    onCancel: (_?: unknown) => void 0,
+  };
+
+  // 类型正确
+  const result: number = await asyncModalRender(StandardModal, props);
+  console.log('result:', result);
+
+  // 类型正确, 使用 withAsyncModalPropsMapper，将 onFinished 映射为 onOk, onClose 映射为 onCancel，内部会自动处理 类型映射。
+  const Comp = withAsyncModalPropsMapper(BusinessModal, ['onFinished', 'onClose']);
+  const data: number = await asyncModalRender(Comp, props);
+  console.log('data:', data);
+}
+```
+
 ## API
 
 ### asyncModalRender
 
 直接将组件渲染到指定容器元素下。
 
-```typescript
-function asyncModalRender<D extends AsyncModalProps> (
-  Comp: React.ComponentType<D>,
-  props: Omit<D, keyof AsyncModalProps> & Pick<D, keyof AsyncModalProps>,
-  container?: Element
-): Promise<D['onOk'] extends (v: infer R) => void ? R : never>
+```typescript | pure
+interface asyncModalRender {
+  <D extends AsyncModalProps> (
+    Comp: React.ComponentType<D>,
+    props: ASyncModalRenderImpProps<D>,
+    container?: Element,
+  ): Promise<D['onOk'] extends (v: infer R) => void ? R : never>
+}
+```
+ASyncModalRenderImpProps:
+
+```typescript | pure
+type ASyncModalRenderImpProps<D extends AsyncModalProps> =
+  & Pick<D, Exclude<keyof D, keyof AsyncModalProps>>
+  & Partial<Pick<D, keyof AsyncModalProps>>;
 ```
 
 **参数：**
@@ -49,8 +109,10 @@ function asyncModalRender<D extends AsyncModalProps> (
 
 在组件内使用的 Hook，返回弹窗渲染相关的方法和元素。
 
-```typescript
-function useAsyncModalRender (): UseAsyncModalReturn
+```typescript | pure
+interface useAsyncModalRender {
+  (): UseAsyncModalReturn
+}
 
 interface UseAsyncModalReturn {
   render: AsyncModalRender;
@@ -71,18 +133,22 @@ interface UseAsyncModalReturn {
 
 提供 asyncModalRender 上下文的 Provider 组件，用于在应用中共享弹窗渲染能力。
 
-```typescript
-function AsyncModalRenderProvider ({ children }: { children: React.ReactNode }): React.ReactElement
+```typescript | pure
+interface AsyncModalRenderProvider {
+  ({ children }: { children: React.ReactNode }): React.ReactElement
+}
 ```
 
 ### useAsyncModalRenderContext
 
 获取 AsyncModalContext 上下文的 Hook，必须在 AsyncModalRenderProvider 内部使用。
 
-```typescript
-function useAsyncModalRenderContext (): AsyncModalContextType
+```typescript | pure
+interface useAsyncModalRenderContext {
+  (): AsyncModalContext
+}
 
-interface AsyncModalContextType {
+interface AsyncModalContext {
   render: AsyncModalRender;
   renderFactory: AsyncModalRenderFactory;
 }
@@ -99,7 +165,7 @@ interface AsyncModalContextType {
 
 弹窗组件需要继承的基础属性接口。
 
-```typescript
+```typescript | pure
 interface AsyncModalProps {
   onOk?: (...args: any[]) => void;
   onCancel?: (error?: any) => void;
@@ -117,7 +183,7 @@ interface AsyncModalProps {
 
 用户取消操作时抛出的错误类。
 
-```typescript
+```typescript | pure
 interface AsyncModalRenderCancelError extends Error {
   constructor ();
 }
@@ -125,6 +191,23 @@ interface AsyncModalRenderCancelError extends Error {
 
 当用户点击取消按钮且 `onCancel` 被调用时没有传入错误参数，Promise 会 reject 一个 `AsyncModalRenderCancelError` 实例。
 
+### withAsyncModalPropsMapper
+
+```typescript | pure
+interface withAsyncModalPropsMapper {
+  <
+    A extends object,
+    OnOk extends keyof A,
+    OnCancel extends keyof A
+  >
+  (
+    Comp: ComponentType<A>,
+    keys: [OnOk, OnCancel],
+  ): ComponentType<
+    Pick<A, Exclude<keyof A, OnOk | OnCancel>> & { onCancel: A[OnCancel]; onOk: A[OnOk] }
+  >
+}
+```
 
 ## 注意事项
 
