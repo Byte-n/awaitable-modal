@@ -15,9 +15,11 @@ export default defineConfig({
     },
     nav: [
       { title: '快速开始', link: '/guide' },
-      { title: '使用手册', link: '/components' }
+      { title: '使用手册', link: '/components' },
+      { title: '更新日志', link: '/changelogs' },
     ],
-    footer: 'Made with<span style="color: rgb(255, 255, 255);">❤</span>by <span>Byte-n | Copyright © 2025-present</span>',
+    footer:
+      'Made with<span style="color: rgb(255, 255, 255);">❤</span>by <span>Byte-n | Copyright © 2025-present</span>',
     github: 'https://github.com/Byte-n/async-modal-render',
     // sidebarGroupModePath: ['/config', '/guide'],
     description: '一个将 React 模态框操作 Promise 化的轻量级工具库，支持 async/await 语法，让异步交互代码更简洁优雅',
@@ -30,6 +32,10 @@ export default defineConfig({
       {
         text: '使用手册',
         link: '/components',
+      },
+      {
+        text: '更新日志',
+        link: '/changelogs',
       },
     ],
     features: [
@@ -87,4 +93,4 @@ export default defineConfig({
       },
     ],
   }),
-})
+});
