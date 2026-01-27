@@ -84,15 +84,20 @@ resolve/reject 逻辑。
 在行内动态映射，无需额外文件或组件定义。
 
 ```tsx | pure
+// 现有的组件
+function MyModal () { ... }
+
 // NiceModal: ❌ 必须定义 Wrapper
 const MyModalWrapper = NiceModal.create(() => {
   const modal = useModal(); // 耦合
   return <MyModal visible={modal.visible} onOk={modal.resolve}/>;
 });
+// 再通过 NiceModal.show 调用
+await NiceModal.show(MyModalWrapper, {})
 
 // Async Modal Render: ✅ 直接使用，或行内映射
 await render(
-  withAsyncModalPropsMapper(MyCustomModal, ['onConfirm', 'onClose']),
+  withAsyncModalPropsMapper(MyCustomModal, ['onConfirm', 'onClose']), // 'onConfirm', 'onClose' 具有TS类型约束
   { open: true }
 );
 ```
@@ -102,6 +107,27 @@ await render(
 **NiceModal:** UI 组件内部必须引入 `nice-modal-react` 库，并使用 `useModal` Hook。这使得 UI 组件与特定库耦合，难以复用。
 **Async Modal Render:** UI 组件完全不需要引入 `async-modal-render`。它只是一个普通的 React 组件，通过 Props
 接收回调。库的逻辑完全封装在调用层。
+
+如果组件一开始就是用 `NiceModal.create` 创建的，则无法直接调用、或直接传递给第三方组件、框架使用，必须依赖`NiceModal.show`调用
+
+```tsx | pure
+// 使用 NiceModal 函数包装组件
+const SelectUserModal = NiceModal.create((props) => {
+  const modal = useModal();
+  // 组件实现
+  return ...;
+});
+
+// ✅只能通过 `NiceModal.show` 调用 
+NiceModal.show(SelectUserModal, { ... })
+
+// ❌不能直接调用 （若非要使用，则需要传入与 NiceModal 耦合的 `id` `defaultVisible` `keepMounted`）
+<SelectUserModal ... />
+
+// ❌不能传递给第三方包, 内部会直接实例化 SelectUserModal
+import { register } from 'xxx';
+register('select-user', SelectUserModal)
+```
 
 ### 2.3 自动生命周期管理 (Auto Lifecycle)
 
