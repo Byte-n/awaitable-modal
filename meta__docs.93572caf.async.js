@@ -152,101 +152,74 @@ async function handleSubmit() {
     }
   }
 }
-`,paraId:10,tocIndex:6},{value:"\u662F\u7684\u3002\u5982\u679C\u4E0D\u8C03\u7528\u8FD9\u4E24\u4E2A\u65B9\u6CD5\u4E2D\u7684\u4EFB\u4F55\u4E00\u4E2A\uFF0CPromise \u5C06\u6C38\u8FDC\u4E0D\u4F1A resolve \u6216 reject\uFF0C\u5BFC\u81F4\u4EE3\u7801\u5361\u4F4F\u3002",paraId:11,tocIndex:8},{value:"\u53EF\u4EE5\u8C03\u7528\uFF0C\u4F46\u53EA\u6709\u7B2C\u4E00\u6B21\u8C03\u7528\u4F1A\u751F\u6548\u3002\u540E\u7EED\u8C03\u7528\u4F1A\u88AB\u5FFD\u7565\u3002",paraId:12,tocIndex:9},{value:"\u5F39\u7A97\u5C06\u65E0\u6CD5\u663E\u793A\uFF0C\u56E0\u4E3A holder \u662F\u5F39\u7A97\u7684\u5BB9\u5668\u3002\u52A1\u5FC5\u5728\u7EC4\u4EF6\u4E2D\u6E32\u67D3 ",paraId:13,tocIndex:10},{value:"{holder}",paraId:13,tocIndex:10},{value:"\u3002",paraId:13,tocIndex:10},{value:"asyncModalRender()",paraId:14,tocIndex:11},{value:" \u662F\u51FD\u6570\u5F0F\u8C03\u7528\uFF0C\u53EF\u5728\u4EFB\u4F55\u5730\u65B9\u4F7F\u7528\uFF0C\u4F1A\u81EA\u52A8\u521B\u5EFA DOM \u5BB9\u5668",paraId:14,tocIndex:11},{value:"useAsyncModalRender()",paraId:14,tocIndex:11},{value:" \u662F Hook\uFF0C\u53EA\u80FD\u5728\u51FD\u6570\u7EC4\u4EF6\u4E2D\u4F7F\u7528\uFF0C\u9700\u8981\u624B\u52A8\u6E32\u67D3 holder",paraId:14,tocIndex:11},{value:"useAsyncModalRenderContext",paraId:14,tocIndex:11},{value:" \u662F Context Hook\uFF0C\u642D\u914D ",paraId:14,tocIndex:11},{value:"AsyncModalRenderProvider",paraId:14,tocIndex:11},{value:" \u53EF\u4EE5\u7701\u53BB\u624B\u52A8\u6E32\u67D3 holder \u7684\u6B65\u9AA4",paraId:14,tocIndex:11},{value:"\u73B0\u5728\u4F60\u5DF2\u7ECF\u638C\u63E1\u4E86 async-modal-render \u7684\u57FA\u672C\u7528\u6CD5\uFF01\u63A5\u4E0B\u6765\u53EF\u4EE5\uFF1A",paraId:15,tocIndex:12},{value:"\u67E5\u770B ",paraId:16,tocIndex:12},{value:"\u5B8C\u6574\u6587\u6863",paraId:17,tocIndex:12},{value:" \u4E86\u89E3\u66F4\u591A API \u7EC6\u8282",paraId:16,tocIndex:12},{value:"\u7ED3\u5408 Ant Design\u3001Material-UI \u7B49 UI \u5E93\u4F7F\u7528",paraId:16,tocIndex:12},{value:"\u6839\u636E\u9879\u76EE\u9700\u6C42\u5B9A\u5236\u4F60\u81EA\u5DF1\u7684 Modal \u7EC4\u4EF6",paraId:16,tocIndex:12},{value:"\u795D\u4F60\u4F7F\u7528\u6109\u5FEB\uFF01 \u{1F389}",paraId:18,tocIndex:12}]},6387:function(d,e,a){a.r(e),a.d(e,{texts:function(){return n}});const n=[{value:"\u901A\u8FC7\u5BF9\u6BD4 ",paraId:0,tocIndex:0},{value:"Normal",paraId:0,tocIndex:0},{value:" (\u4F20\u7EDF React \u72B6\u6001\u7BA1\u7406) \u548C ",paraId:0,tocIndex:0},{value:"NiceModal",paraId:0,tocIndex:0},{value:"(@ebay/nice-modal-react) \u5E93\uFF0C\u4EE5\u4E0B\u662F ",paraId:0,tocIndex:0},{value:"async-modal-render",paraId:0,tocIndex:0},{value:" \u7684\u4E3B\u8981\u4F18\u52BF\u603B\u7ED3\u3002",paraId:0,tocIndex:0},{value:"Normal (\u4F20\u7EDF\u65B9\u5F0F):",paraId:1,tocIndex:1},{value:`
-\u9700\u8981\u5B9A\u4E49\u5927\u91CF\u7684 `,paraId:1,tocIndex:1},{value:"useState",paraId:1,tocIndex:1},{value:"\uFF0C\u7F16\u5199\u5F00\u5173\u5904\u7406\u51FD\u6570\uFF0C\u5E76\u4E14\u5FC5\u987B\u5728 JSX \u4E2D\u663E\u5F0F\u6302\u8F7D\u7EC4\u4EF6\u3002",paraId:1,tocIndex:1},{value:`// Normal.tsx \u4F2A\u4EE3\u7801
+`,paraId:10,tocIndex:6},{value:"\u662F\u7684\u3002\u5982\u679C\u4E0D\u8C03\u7528\u8FD9\u4E24\u4E2A\u65B9\u6CD5\u4E2D\u7684\u4EFB\u4F55\u4E00\u4E2A\uFF0CPromise \u5C06\u6C38\u8FDC\u4E0D\u4F1A resolve \u6216 reject\uFF0C\u5BFC\u81F4\u4EE3\u7801\u5361\u4F4F\u3002",paraId:11,tocIndex:8},{value:"\u53EF\u4EE5\u8C03\u7528\uFF0C\u4F46\u53EA\u6709\u7B2C\u4E00\u6B21\u8C03\u7528\u4F1A\u751F\u6548\u3002\u540E\u7EED\u8C03\u7528\u4F1A\u88AB\u5FFD\u7565\u3002",paraId:12,tocIndex:9},{value:"\u5F39\u7A97\u5C06\u65E0\u6CD5\u663E\u793A\uFF0C\u56E0\u4E3A holder \u662F\u5F39\u7A97\u7684\u5BB9\u5668\u3002\u52A1\u5FC5\u5728\u7EC4\u4EF6\u4E2D\u6E32\u67D3 ",paraId:13,tocIndex:10},{value:"{holder}",paraId:13,tocIndex:10},{value:"\u3002",paraId:13,tocIndex:10},{value:"asyncModalRender()",paraId:14,tocIndex:11},{value:" \u662F\u51FD\u6570\u5F0F\u8C03\u7528\uFF0C\u53EF\u5728\u4EFB\u4F55\u5730\u65B9\u4F7F\u7528\uFF0C\u4F1A\u81EA\u52A8\u521B\u5EFA DOM \u5BB9\u5668",paraId:14,tocIndex:11},{value:"useAsyncModalRender()",paraId:14,tocIndex:11},{value:" \u662F Hook\uFF0C\u53EA\u80FD\u5728\u51FD\u6570\u7EC4\u4EF6\u4E2D\u4F7F\u7528\uFF0C\u9700\u8981\u624B\u52A8\u6E32\u67D3 holder",paraId:14,tocIndex:11},{value:"useAsyncModalRenderContext",paraId:14,tocIndex:11},{value:" \u662F Context Hook\uFF0C\u642D\u914D ",paraId:14,tocIndex:11},{value:"AsyncModalRenderProvider",paraId:14,tocIndex:11},{value:" \u53EF\u4EE5\u7701\u53BB\u624B\u52A8\u6E32\u67D3 holder \u7684\u6B65\u9AA4",paraId:14,tocIndex:11},{value:"\u73B0\u5728\u4F60\u5DF2\u7ECF\u638C\u63E1\u4E86 async-modal-render \u7684\u57FA\u672C\u7528\u6CD5\uFF01\u63A5\u4E0B\u6765\u53EF\u4EE5\uFF1A",paraId:15,tocIndex:12},{value:"\u67E5\u770B ",paraId:16,tocIndex:12},{value:"\u5B8C\u6574\u6587\u6863",paraId:17,tocIndex:12},{value:" \u4E86\u89E3\u66F4\u591A API \u7EC6\u8282",paraId:16,tocIndex:12},{value:"\u7ED3\u5408 Ant Design\u3001Material-UI \u7B49 UI \u5E93\u4F7F\u7528",paraId:16,tocIndex:12},{value:"\u6839\u636E\u9879\u76EE\u9700\u6C42\u5B9A\u5236\u4F60\u81EA\u5DF1\u7684 Modal \u7EC4\u4EF6",paraId:16,tocIndex:12},{value:"\u795D\u4F60\u4F7F\u7528\u6109\u5FEB\uFF01 \u{1F389}",paraId:18,tocIndex:12}]},6387:function(d,e,a){a.r(e),a.d(e,{texts:function(){return n}});const n=[{value:"async-modal-render",paraId:0,tocIndex:0},{value:" \u7ED3\u5408\u4E86\u51FD\u6570\u5F0F\u8C03\u7528\u7684\u4FBF\u5229\u6027\u548C\u5BF9\u73B0\u6709\u7EC4\u4EF6\u7684\u4F4E\u4FB5\u5165\u6027\uFF0C\u5728\u5F00\u53D1\u6548\u7387\u3001\u4EE3\u7801\u8D28\u91CF\u548C\u7EF4\u62A4\u6027\u4E0A\u90FD\u6709\u663E\u8457\u4F18\u52BF\u3002",paraId:0,tocIndex:0},{value:"NiceModal \u6307\u7684\u662F\uFF1A@ebay/nice-modal-react",paraId:1,tocIndex:1},{value:"\u7279\u6027",paraId:2,tocIndex:1},{value:"Normal (\u4F20\u7EDF\u65B9\u5F0F)",paraId:2,tocIndex:1},{value:"NiceModal",paraId:2,tocIndex:1},{value:"Async Modal Render",paraId:2,tocIndex:1},{value:"\u72B6\u6001\u7BA1\u7406",paraId:2,tocIndex:1},{value:"\u624B\u52A8 (useState)",paraId:2,tocIndex:1},{value:"\u5185\u90E8 Hook",paraId:2,tocIndex:1},{value:"\u81EA\u52A8 (\u65E0\u9700 State)",paraId:2,tocIndex:1},{value:"\u7EC4\u4EF6\u6302\u8F7D",paraId:2,tocIndex:1},{value:"JSX \u663E\u5F0F\u6302\u8F7D",paraId:2,tocIndex:1},{value:"\u9700\u8981 Wrapper \u6CE8\u518C",paraId:2,tocIndex:1},{value:"\u51FD\u6570\u8C03\u7528\u81EA\u52A8\u6302\u8F7D",paraId:2,tocIndex:1},{value:"\u903B\u8F91\u6D41\u7A0B",paraId:2,tocIndex:1},{value:"\u5206\u6563 (onClick/onOk)",paraId:2,tocIndex:1},{value:"\u57FA\u4E8E Promise",paraId:2,tocIndex:1},{value:"\u57FA\u4E8E Promise \u7684\u7EBF\u6027\u6D41",paraId:2,tocIndex:1},{value:"\u7EC4\u4EF6\u4FB5\u5165\u6027",paraId:2,tocIndex:1},{value:"\u4F4E",paraId:2,tocIndex:1},{value:"\u9AD8 (\u9700\u5F15\u5165 useModal)",paraId:2,tocIndex:1},{value:"\u96F6 (\u7EAF\u51C0\u7EC4\u4EF6)",paraId:2,tocIndex:1},{value:"\u7C7B\u578B\u652F\u6301",paraId:2,tocIndex:1},{value:"\u624B\u52A8\u5B9A\u4E49",paraId:2,tocIndex:1},{value:"\u90E8\u5206\u652F\u6301",paraId:2,tocIndex:1},{value:"\u5168\u81EA\u52A8\u63A8\u5BFC (Props/Result)",paraId:2,tocIndex:1},{value:"\u751F\u547D\u5468\u671F",paraId:2,tocIndex:1},{value:"\u624B\u52A8\u63A7\u5236",paraId:2,tocIndex:1},{value:"\u9700\u624B\u52A8 remove",paraId:2,tocIndex:1},{value:"\u81EA\u52A8\u9500\u6BC1 / \u6309\u9700\u6301\u4E45\u5316",paraId:2,tocIndex:1},{value:"\u4EE3\u7801\u91CF",paraId:2,tocIndex:1},{value:"\u7E41\u7410",paraId:2,tocIndex:1},{value:"\u4E2D\u7B49",paraId:2,tocIndex:1},{value:"\u6700\u7B80",paraId:2,tocIndex:1},{value:"Normal:",paraId:3,tocIndex:3},{value:" \u9700\u8981\u5B9A\u4E49\u5927\u91CF\u7684 ",paraId:3,tocIndex:3},{value:"useState",paraId:3,tocIndex:3},{value:`\uFF0C\u7F16\u5199\u5F00\u5173\u5904\u7406\u51FD\u6570\uFF0C\u5E76\u4E14\u5FC5\u987B\u5728 JSX \u4E2D\u663E\u5F0F\u6302\u8F7D\u7EC4\u4EF6\u3002
+`,paraId:3,tocIndex:3},{value:"Async Modal Render:",paraId:3,tocIndex:3},{value:" \u5B8C\u5168\u4E0D\u9700\u8981\u5B9A\u4E49 State\uFF0C\u4E5F\u4E0D\u9700\u8981\u5728 JSX \u4E2D\u9884\u57CB\u7EC4\u4EF6\u3002",paraId:3,tocIndex:3},{value:"\u4EE3\u7801\u5BF9\u6BD4:",paraId:4,tocIndex:3},{value:`// Normal.tsx (\u4F20\u7EDF\u65B9\u5F0F)
 function NormalExample() {
-  const [visible, setVisible] = useState(false);
-
-  const handleOpen = () => setVisible(true);
-  const handleOk = () => setVisible(false);
+  const [visible, setVisible] = useState(false); // \u274C \u5197\u4F59\u72B6\u6001
 
   return (
     <>
-      <Button onClick={handleOpen}>Open Modal</Button>
-      {/* \u5FC5\u987B\u5728 JSX \u4E2D\u9884\u57CB\u7EC4\u4EF6 */}
+      <Button onClick={() => setVisible(true)}>Open</Button>
+      {/* \u274C JSX \u6C61\u67D3 */}
       <MyModal
         visible={visible}
-        onOk={handleOk}
+        onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
       />
     </>
   );
 }
-`,paraId:2,tocIndex:1},{value:"Async Modal Render:",paraId:3,tocIndex:1},{value:`
-\u5B8C\u5168\u4E0D\u9700\u8981\u5B9A\u4E49 State\uFF0C\u4E5F\u4E0D\u9700\u8981\u5728 JSX \u4E2D\u9884\u57CB\u7EC4\u4EF6\u3002`,paraId:3,tocIndex:1},{value:`// AsyncModalExample.tsx \u4F2A\u4EE3\u7801
+
+// AsyncModalExample.tsx (Async Modal Render)
 function AsyncExample() {
   const { render } = useAsyncModalRenderContext();
-
-  const handleOpen = async () => {
-    // \u76F4\u63A5\u51FD\u6570\u5F0F\u8C03\u7528\uFF0C\u81EA\u52A8\u6302\u8F7D\u548C\u9500\u6BC1
-    await render(MyModal, { visible: true });
-  };
-
-  return <Button onClick={handleOpen}>Open Modal</Button>;
+  // \u2705 \u7EAF\u51FD\u6570\u8C03\u7528\uFF0C\u65E0\u72B6\u6001\uFF0C\u65E0 JSX \u6302\u8F7D
+  return <Button onClick={() => render(MyModal, { visible: true })}>Open</Button>;
 }
-`,paraId:4,tocIndex:1},{value:"NiceModal:",paraId:5,tocIndex:2},{value:`
-\u4E3A\u4E86\u4F7F\u7528\u73B0\u6709\u7684\u5F39\u7A97\u7EC4\u4EF6\uFF0C\u5FC5\u987B\u5148\u4F7F\u7528 `,paraId:5,tocIndex:2},{value:"NiceModal.create",paraId:5,tocIndex:2},{value:" \u521B\u5EFA\u4E00\u4E2A\u5305\u88C5\u5668 (Wrapper) \u6765\u5904\u7406 ",paraId:5,tocIndex:2},{value:"useModal",paraId:5,tocIndex:2},{value:" \u7684 resolve/reject \u903B\u8F91\u3002",paraId:5,tocIndex:2},{value:`// NiceModalExample.tsx \u4F2A\u4EE3\u7801
-// \u5FC5\u987B\u5B9A\u4E49\u989D\u5916\u7684 Wrapper
+`,paraId:5,tocIndex:3},{value:"Normal:",paraId:6,tocIndex:4},{value:" \u4E1A\u52A1\u903B\u8F91\u88AB\u5206\u6563\u5728 ",paraId:6,tocIndex:4},{value:"onClick",paraId:6,tocIndex:4},{value:"\uFF08\u6253\u5F00\uFF09\u3001",paraId:6,tocIndex:4},{value:"onOk",paraId:6,tocIndex:4},{value:"\uFF08\u786E\u8BA4\uFF09\u3001",paraId:6,tocIndex:4},{value:"onCancel",paraId:6,tocIndex:4},{value:`\uFF08\u53D6\u6D88\uFF09\u7B49\u591A\u4E2A\u56DE\u8C03\u51FD\u6570\u4E2D\uFF0C\u5BFC\u81F4\u4EE3\u7801\u5272\u88C2\uFF0C\u9605\u8BFB\u56F0\u96BE\u3002
+`,paraId:6,tocIndex:4},{value:"Async Modal Render:",paraId:6,tocIndex:4},{value:" \u4F7F\u7528 ",paraId:6,tocIndex:4},{value:"await",paraId:6,tocIndex:4},{value:" \u5728\u4E00\u4E2A\u51FD\u6570\u5185\u5B8C\u6210\u201C\u6253\u5F00 -> \u7B49\u5F85\u64CD\u4F5C -> \u83B7\u53D6\u7ED3\u679C\u201D\u7684\u5B8C\u6574\u6D41\u7A0B\uFF0C\u903B\u8F91\u8FDE\u8D2F\u3002",paraId:6,tocIndex:4},{value:`// Async Modal Render: \u7EBF\u6027\u903B\u8F91
+const handleSubmit = async () => {
+  try {
+    const inputValue = await render(InputModal, { visible: true });
+    // \u2705 \u903B\u8F91\u7D27\u51D1\uFF1A\u83B7\u53D6\u7ED3\u679C\u540E\u76F4\u63A5\u7EE7\u7EED\u6267\u884C
+    await submitToApi(inputValue);
+    message.success('\u64CD\u4F5C\u6210\u529F');
+  } catch {
+    message.info('\u7528\u6237\u5DF2\u53D6\u6D88');
+  }
+};
+`,paraId:7,tocIndex:4},{value:"NiceModal:",paraId:8,tocIndex:6},{value:" \u4E3A\u4E86\u4F7F\u7528\u73B0\u6709\u7684\u5F39\u7A97\u7EC4\u4EF6\uFF0C\u5FC5\u987B\u5148\u4F7F\u7528 ",paraId:8,tocIndex:6},{value:"NiceModal.create",paraId:8,tocIndex:6},{value:" \u521B\u5EFA\u4E00\u4E2A\u5305\u88C5\u5668 (Wrapper) \u6765\u5904\u7406 ",paraId:8,tocIndex:6},{value:"useModal",paraId:8,tocIndex:6},{value:` \u7684
+resolve/reject \u903B\u8F91\u3002
+`,paraId:8,tocIndex:6},{value:"Async Modal Render:",paraId:8,tocIndex:6},{value:" \u53EF\u4EE5\u76F4\u63A5\u4F7F\u7528\u539F\u59CB\u7EC4\u4EF6\uFF0C\u96F6\u4FB5\u5165\u6027\u3002\u5982\u679C Props \u547D\u540D\u4E0D\u6807\u51C6\uFF0C\u53EF\u4EE5\u4F7F\u7528 ",paraId:8,tocIndex:6},{value:"withAsyncModalPropsMapper",paraId:8,tocIndex:6},{value:`
+\u5728\u884C\u5185\u52A8\u6001\u6620\u5C04\uFF0C\u65E0\u9700\u989D\u5916\u6587\u4EF6\u6216\u7EC4\u4EF6\u5B9A\u4E49\u3002`,paraId:8,tocIndex:6},{value:`// NiceModal: \u274C \u5FC5\u987B\u5B9A\u4E49 Wrapper
 const MyModalWrapper = NiceModal.create(() => {
-  const modal = useModal();
-  return (
-    <MyModal
-      visible={modal.visible}
-      onOk={() => {
-        modal.resolve(); // \u624B\u52A8\u5904\u7406 Promise
-        modal.remove();  // \u624B\u52A8\u6E05\u7406
-      }}
-    />
-  );
+  const modal = useModal(); // \u8026\u5408
+  return <MyModal visible={modal.visible} onOk={modal.resolve}/>;
 });
 
-// \u8C03\u7528\u65F6
-NiceModal.show(MyModalWrapper);
-`,paraId:6,tocIndex:2},{value:"Async Modal Render:",paraId:7,tocIndex:2},{value:`
-\u53EF\u4EE5\u76F4\u63A5\u4F7F\u7528\u539F\u59CB\u7EC4\u4EF6\uFF0C\u96F6\u4FB5\u5165\u6027\u3002\u5982\u679C Props \u547D\u540D\u4E0D\u6807\u51C6\uFF0C\u53EF\u4EE5\u4F7F\u7528 `,paraId:7,tocIndex:2},{value:"withAsyncModalPropsMapper",paraId:7,tocIndex:2},{value:" \u5728\u884C\u5185\u52A8\u6001\u6620\u5C04\uFF0C\u65E0\u9700\u989D\u5916\u6587\u4EF6\u6216\u7EC4\u4EF6\u5B9A\u4E49\u3002",paraId:7,tocIndex:2},{value:`// AsyncModalExample.tsx \u4F2A\u4EE3\u7801
-// \u573A\u666F 1: \u76F4\u63A5\u4F7F\u7528
-await render(MyModal, { visible: true });
-
-// \u573A\u666F 2: \u884C\u5185\u52A8\u6001\u6620\u5C04 Props (\u65E0\u9700 Wrapper)
+// Async Modal Render: \u2705 \u76F4\u63A5\u4F7F\u7528\uFF0C\u6216\u884C\u5185\u6620\u5C04
 await render(
   withAsyncModalPropsMapper(MyCustomModal, ['onConfirm', 'onClose']),
   { open: true }
 );
-`,paraId:8,tocIndex:2},{value:"\u903B\u8F91\u66F4\u52A0\u8FDE\u8D2F\uFF0C\u7B26\u5408\u76F4\u89C9\uFF0C\u907F\u514D\u4E86\u903B\u8F91\u5206\u6563\u5728 ",paraId:9,tocIndex:3},{value:"onClick",paraId:9,tocIndex:3},{value:" \u548C ",paraId:9,tocIndex:3},{value:"onOk",paraId:9,tocIndex:3},{value:" \u7B49\u591A\u4E2A\u56DE\u8C03\u51FD\u6570\u4E2D\u3002",paraId:9,tocIndex:3},{value:`const handleSubmit = async () => {
-  try {
-    // 1. \u6253\u5F00\u5F39\u7A97\u5E76\u7B49\u5F85\u7528\u6237\u64CD\u4F5C
-    const inputValue = await render(InputModal, { visible: true });
-    
-    // 2. \u83B7\u53D6\u7ED3\u679C\u540E\u76F4\u63A5\u8FDB\u884C\u540E\u7EED\u5904\u7406 (\u4EC5\u5728\u7528\u6237\u786E\u8BA4\u540E\u6267\u884C)
-    await submitToApi(inputValue);
-    message.success('\u64CD\u4F5C\u6210\u529F');
-    
-  } catch {
-    // 3. \u5904\u7406\u7528\u6237\u53D6\u6D88\u7684\u60C5\u51B5
-    message.info('\u7528\u6237\u5DF2\u53D6\u6D88');
-  }
-};
-`,paraId:10,tocIndex:3},{value:"async-modal-render",paraId:11,tocIndex:4},{value:" \u63D0\u4F9B\u4E86\u4F18\u79C0\u7684 TypeScript \u7C7B\u578B\u63A8\u5BFC\u80FD\u529B\uFF0C\u80FD\u591F\u81EA\u52A8\u8BC6\u522B\u7EC4\u4EF6 Props \u548C\u8FD4\u56DE\u503C\u7C7B\u578B\uFF0C\u63D0\u4F9B\u5F00\u53D1\u65F6\u7684\u667A\u80FD\u63D0\u793A\u548C\u7C7B\u578B\u5B89\u5168\u4FDD\u969C\u3002",paraId:11,tocIndex:4},{value:"\u5165\u53C2\u7C7B\u578B\u7EA6\u675F",paraId:12,tocIndex:4},{value:"\uFF1A\u8C03\u7528 ",paraId:12,tocIndex:4},{value:"render",paraId:12,tocIndex:4},{value:" \u65F6\uFF0C\u4F1A\u81EA\u52A8\u68C0\u67E5\u4F20\u5165\u7684 ",paraId:12,tocIndex:4},{value:"props",paraId:12,tocIndex:4},{value:" \u662F\u5426\u7B26\u5408\u7EC4\u4EF6\u5B9A\u4E49\u7684 Props \u7C7B\u578B\u3002",paraId:12,tocIndex:4},{value:"\u8FD4\u56DE\u503C\u7C7B\u578B\u63A8\u5BFC",paraId:12,tocIndex:4},{value:"\uFF1A",paraId:12,tocIndex:4},{value:"await render(...)",paraId:12,tocIndex:4},{value:" \u7684\u8FD4\u56DE\u503C\u7C7B\u578B\u4F1A\u81EA\u52A8\u63A8\u5BFC\u4E3A\u7EC4\u4EF6\u56DE\u8C03\u51FD\u6570\uFF08\u5982 ",paraId:12,tocIndex:4},{value:"onOk",paraId:12,tocIndex:4},{value:", ",paraId:12,tocIndex:4},{value:"onConfirm",paraId:12,tocIndex:4},{value:"\uFF09\u7684\u53C2\u6570\u7C7B\u578B\u3002",paraId:12,tocIndex:4},{value:`// \u5B9A\u4E49\u7EC4\u4EF6 Props
-interface MyModalProps {
-  title: string;
-  onConfirm: (result: { id: number; name: string }) => void;
-  onCancel: () => void;
-  visible: boolean;
-}
-
-// \u8C03\u7528\u793A\u4F8B
+`,paraId:9,tocIndex:6},{value:"NiceModal:",paraId:10,tocIndex:7},{value:" UI \u7EC4\u4EF6\u5185\u90E8\u5FC5\u987B\u5F15\u5165 ",paraId:10,tocIndex:7},{value:"nice-modal-react",paraId:10,tocIndex:7},{value:" \u5E93\uFF0C\u5E76\u4F7F\u7528 ",paraId:10,tocIndex:7},{value:"useModal",paraId:10,tocIndex:7},{value:` Hook\u3002\u8FD9\u4F7F\u5F97 UI \u7EC4\u4EF6\u4E0E\u7279\u5B9A\u5E93\u8026\u5408\uFF0C\u96BE\u4EE5\u590D\u7528\u3002
+`,paraId:10,tocIndex:7},{value:"Async Modal Render:",paraId:10,tocIndex:7},{value:" UI \u7EC4\u4EF6\u5B8C\u5168\u4E0D\u9700\u8981\u5F15\u5165 ",paraId:10,tocIndex:7},{value:"async-modal-render",paraId:10,tocIndex:7},{value:`\u3002\u5B83\u53EA\u662F\u4E00\u4E2A\u666E\u901A\u7684 React \u7EC4\u4EF6\uFF0C\u901A\u8FC7 Props
+\u63A5\u6536\u56DE\u8C03\u3002\u5E93\u7684\u903B\u8F91\u5B8C\u5168\u5C01\u88C5\u5728\u8C03\u7528\u5C42\u3002`,paraId:10,tocIndex:7},{value:"NiceModal:",paraId:11,tocIndex:8},{value:" \u9ED8\u8BA4\u884C\u4E3A\u662F\u201C\u4FDD\u7559\u201D\u3002\u5173\u95ED\u5F39\u7A97\u540E\uFF0CDOM \u8282\u70B9\u4ECD\u7136\u5B58\u5728\uFF0C\u5FC5\u987B\u663E\u5F0F\u8C03\u7528 ",paraId:11,tocIndex:8},{value:"modal.remove()",paraId:11,tocIndex:8},{value:` \u624D\u80FD\u9500\u6BC1\u3002\u5BB9\u6613\u9020\u6210\u5185\u5B58\u6CC4\u6F0F\u3002
+`,paraId:11,tocIndex:8},{value:"Async Modal Render:",paraId:11,tocIndex:8},{value:" \u9ED8\u8BA4\u884C\u4E3A\u662F\u201C\u9500\u6BC1\u201D\u3002",paraId:11,tocIndex:8},{value:"render",paraId:11,tocIndex:8},{value:" Promise \u7ED3\u675F\u540E\uFF0C\u5E93\u4F1A\u81EA\u52A8\u5378\u8F7D\u7EC4\u4EF6\u5E76\u6E05\u7406 DOM\u3002\u5929\u7136\u675C\u7EDD\u5185\u5B58\u6CC4\u6F0F\u3002",paraId:11,tocIndex:8},{value:"NiceModal:",paraId:12,tocIndex:9},{value:` \u9ED8\u8BA4\u4E0D\u9500\u6BC1\u5BFC\u81F4\u72B6\u6001\u6B8B\u7559\uFF0C\u9700\u8981\u624B\u52A8\u91CD\u7F6E\u3002
+`,paraId:12,tocIndex:9},{value:"Async Modal Render:",paraId:12,tocIndex:9},{value:" \u9ED8\u8BA4\u9500\u6BC1\u4FDD\u8BC1\u4E86\u6BCF\u6B21\u6253\u5F00\u90FD\u662F\u5168\u65B0\u7684\u72B6\u6001 (Reset)\u3002\u540C\u65F6\u63D0\u4F9B\u4E86\u663E\u5F0F\u7684\u6301\u4E45\u5316\u9009\u9879 (",paraId:12,tocIndex:9},{value:"persistent",paraId:12,tocIndex:9},{value:` key)
+\uFF0C\u63A7\u5236\u6743\u66F4\u7CBE\u51C6\u3002`,paraId:12,tocIndex:9},{value:"async-modal-render",paraId:13,tocIndex:10},{value:" \u63D0\u4F9B\u4E86\u4F18\u79C0\u7684 TypeScript \u7C7B\u578B\u63A8\u5BFC\u80FD\u529B\u3002",paraId:13,tocIndex:10},{value:"\u5165\u53C2\u7C7B\u578B\u7EA6\u675F",paraId:14,tocIndex:10},{value:"\uFF1A\u81EA\u52A8\u68C0\u67E5\u4F20\u5165\u7684 ",paraId:14,tocIndex:10},{value:"props",paraId:14,tocIndex:10},{value:" \u662F\u5426\u7B26\u5408\u7EC4\u4EF6\u5B9A\u4E49\u3002",paraId:14,tocIndex:10},{value:"\u8FD4\u56DE\u503C\u7C7B\u578B\u63A8\u5BFC",paraId:14,tocIndex:10},{value:"\uFF1A",paraId:14,tocIndex:10},{value:"await render(...)",paraId:14,tocIndex:10},{value:" \u7684\u8FD4\u56DE\u503C\u7C7B\u578B\u4F1A\u81EA\u52A8\u63A8\u5BFC\u4E3A\u7EC4\u4EF6\u56DE\u8C03\u51FD\u6570\u7684\u53C2\u6570\u7C7B\u578B\u3002",paraId:14,tocIndex:10},{value:`// \u2705 \u81EA\u52A8\u63A8\u5BFC result \u7C7B\u578B\uFF0C\u65E0\u9700\u624B\u52A8\u6CDB\u578B
 const result = await render(
   MyModal,
+  { visible: true },
   {
-    title: 'Type Check', // \u2705 \u7C7B\u578B\u68C0\u67E5\uFF1A\u5FC5\u987B\u662F string
-    // otherProp: 123    // \u274C \u62A5\u9519\uFF1A\u5C5E\u6027\u4E0D\u5B58\u5728
-    visible: true
+    // \u6307\u5B9A\u4E00\u4E2A\u56FA\u5B9A\u7684 key \u5B9E\u73B0\u6301\u4E45\u5316
+    persistent: 'my-unique-modal',
+    // \u53EA\u80FD\u586B\u5199 boolean \u7C7B\u578B\u7684 key
+    openField: 'open'
   }
 );
-
-// \u2705 \u81EA\u52A8\u63A8\u5BFC result \u7C7B\u578B\u4E3A: { id: number; name: string }
-console.log(result.name); 
-`,paraId:13,tocIndex:4}]},11579:function(d,e,a){a.r(e),a.d(e,{texts:function(){return n}});const n=[{value:"\u4E00\u4E2A\u5C06 React \u6A21\u6001\u6846\u64CD\u4F5C Promise \u5316\u7684\u8F7B\u91CF\u7EA7\u5DE5\u5177\u5E93\uFF0C\u8BA9\u4F60\u53EF\u4EE5\u4F7F\u7528 ",paraId:0,tocIndex:0},{value:"async/await",paraId:0,tocIndex:0},{value:" \u8BED\u6CD5\u4F18\u96C5\u5730\u5904\u7406\u6A21\u6001\u6846\u4EA4\u4E92\u3002",paraId:0,tocIndex:0},{value:"\u5728\u4F20\u7EDF\u7684 Modal \u4F7F\u7528\u65B9\u5F0F\u4E2D\uFF0C\u6211\u4EEC\u9700\u8981\u901A\u8FC7\u56DE\u8C03\u51FD\u6570\u6765\u5904\u7406\u7528\u6237\u7684\u64CD\u4F5C\uFF0C\u8FD9\u5BFC\u81F4\u4EE3\u7801\u903B\u8F91\u5206\u6563\uFF0C\u96BE\u4EE5\u7EF4\u62A4\uFF1A",paraId:1,tocIndex:2},{value:`// \u274C \u4F20\u7EDF\u65B9\u5F0F\uFF1A\u4EE3\u7801\u903B\u8F91\u5206\u6563\uFF0C\u96BE\u4EE5\u9605\u8BFB
+console.log(result.data); // IDE \u667A\u80FD\u63D0\u793A\u53EF\u7528
+`,paraId:15,tocIndex:10}]},11579:function(d,e,a){a.r(e),a.d(e,{texts:function(){return n}});const n=[{value:"\u4E00\u4E2A\u5C06 React \u6A21\u6001\u6846\u64CD\u4F5C Promise \u5316\u7684\u8F7B\u91CF\u7EA7\u5DE5\u5177\u5E93\uFF0C\u8BA9\u4F60\u53EF\u4EE5\u4F7F\u7528 ",paraId:0,tocIndex:0},{value:"async/await",paraId:0,tocIndex:0},{value:" \u8BED\u6CD5\u4F18\u96C5\u5730\u5904\u7406\u6A21\u6001\u6846\u4EA4\u4E92\u3002",paraId:0,tocIndex:0},{value:"\u5728\u4F20\u7EDF\u7684 Modal \u4F7F\u7528\u65B9\u5F0F\u4E2D\uFF0C\u6211\u4EEC\u9700\u8981\u901A\u8FC7\u56DE\u8C03\u51FD\u6570\u6765\u5904\u7406\u7528\u6237\u7684\u64CD\u4F5C\uFF0C\u8FD9\u5BFC\u81F4\u4EE3\u7801\u903B\u8F91\u5206\u6563\uFF0C\u96BE\u4EE5\u7EF4\u62A4\uFF1A",paraId:1,tocIndex:2},{value:`// \u274C \u4F20\u7EDF\u65B9\u5F0F\uFF1A\u4EE3\u7801\u903B\u8F91\u5206\u6563\uFF0C\u96BE\u4EE5\u9605\u8BFB
 function TraditionalWay() {
   const [visible, setVisible] = useState(false);
 
