@@ -1,6 +1,8 @@
-import React, { ComponentProps, useCallback, useMemo } from 'react';
+import React, { ComponentType, useCallback, useMemo } from 'react';
 import ElementsHolder, { ElementsHolderRef } from '../components/ElementsHolder';
-import { AsyncModalDestroyOptions, AsyncModalRender, AsyncModalRenderFactory, ComputeAsyncModalProps } from '../types';
+import {
+  AsyncModalDestroyOptions, AsyncModalProps, AsyncModalRender, AsyncModalRenderFactory, AsyncModalRenderQuiet,
+} from '../types';
 import { asyncModalRenderImp } from '../utils/asyncModalRenderImp';
 
 /**
@@ -13,10 +15,9 @@ export function useAsyncModalRenderImp() {
 
   // render 链接统一的实现 asyncModalImp
   const render = useCallback<AsyncModalRender>((Comp, props, options) => {
-    const { persistent, openField } = options ?? {};
+    const { persistent, openField, quiet } = options ?? {};
 
-    type PT = ComponentProps<typeof Comp>;
-    const realProps = props ?? ({} as ComputeAsyncModalProps<PT>);
+    const realProps = props ?? ({} as any);
 
     if (persistent && openField) {
       // @ts-ignore
@@ -34,6 +35,7 @@ export function useAsyncModalRenderImp() {
           closeFunc();
         }
       },
+      quiet
     });
 
     const closeFunc = holderRef.current!.patchElement(dom, persistent, openField);
@@ -61,10 +63,16 @@ export function useAsyncModalRenderImp() {
     holderRef.current!.removeElement(options);
   }, []);
 
+  const renderQuiet = useCallback<AsyncModalRenderQuiet>((Comp, props, options) => {
+    // @ts-ignore
+    return render(Comp, props, { ...options, quiet: true })
+  }, [render])
+
   return {
     render,
     holder,
     renderFactory,
     destroy,
+    renderQuiet
   };
 }

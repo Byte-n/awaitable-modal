@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 
 export interface AsyncModalProps {
-  onOk?: (...args: any[]) => void;
+  onOk?: (data: any) => void;
   onCancel?: (error?: any) => void;
 }
 
-type KS = keyof AsyncModalProps;
-export type ComputeAsyncModalProps<D extends AsyncModalProps> = Pick<D, Exclude<keyof D, KS>> & Partial<Pick<D, KS>>;
+export type ComputeAsyncModalProps<D extends AsyncModalProps, Quiet extends boolean> =
+  & Pick<D, Exclude<keyof D, 'onOk' |'onCancel'>>
+  & Partial<Pick<D, 'onOk'>>
+  & (
+    Quiet extends true ? (
+      { onCancel?: VoidFunction }
+    ) : Pick<AsyncModalProps, 'onCancel'>
+  );
 
-export type AsyncModalRenderOptions<D> = {
+export type AsyncModalRenderOptions<D, Quiet extends boolean> = {
   /**
    * 状态持久化的key，若不传，则关闭时直接销毁弹窗。
    */
@@ -17,7 +23,8 @@ export type AsyncModalRenderOptions<D> = {
    * 控制弹窗展示隐藏的prop key
    */
   openField: ExtractBooleanKeys<D>;
-};
+  quiet?: Quiet;
+}
 
 type ExtractBooleanKeys<T> = {
   [K in keyof T]: Required<T>[K] extends boolean ? K : never;
@@ -35,19 +42,30 @@ export interface AsyncModalDestroyOptions {
 }
 
 export interface AsyncModalRender {
-  <D extends AsyncModalProps>(
+  <D extends AsyncModalProps, const Quiet extends boolean>(
     Comp: React.ComponentType<D>,
-    props?: ComputeAsyncModalProps<D>,
-    options?: AsyncModalRenderOptions<D>,
-  ): Promise<D['onOk'] extends (v: infer R) => void ? R : never> & { destroyModal: VoidFunction };
+    props?: ComputeAsyncModalProps<D, Quiet>,
+    options?: AsyncModalRenderOptions<D, Quiet>,
+  ): Promise<D['onOk'] extends (v: infer R) => void ? ComputeQuiet<Quiet, R> : never> & { destroyModal: VoidFunction };
 }
 
-export interface AsyncModalRenderFactory {
+export interface AsyncModalRenderQuiet {
   <D extends AsyncModalProps>(
     Comp: React.ComponentType<D>,
-    props?: ComputeAsyncModalProps<D>,
-    options?: AsyncModalRenderOptions<D>,
-  ): (() => Promise<D['onOk'] extends (v: infer R) => void ? R : never> & { destroyModal: VoidFunction }) & {
+    props?: ComputeAsyncModalProps<D, true>,
+    options?: Omit<AsyncModalRenderOptions<D, true>, 'quiet'>,
+  ): Promise<D['onOk'] extends (v: infer R) => void ? ComputeQuiet<true, R> : never> & { destroyModal: VoidFunction };
+}
+
+// const fun: AsyncModalRender = null as any as AsyncModalRender;
+// fun(null as any as ComponentType<AsyncModalProps & {OPEN?:boolean}>, {onCancel: (_)=> {}}, { persistent:'s', quiet:true, openField: 'OPEN'  })
+
+export interface AsyncModalRenderFactory {
+  <D extends AsyncModalProps, Quiet extends boolean>(
+    Comp: React.ComponentType<D>,
+    props?: ComputeAsyncModalProps<D, Quiet>,
+    options?: AsyncModalRenderOptions<D, Quiet>,
+  ): (() => Promise<D['onOk'] extends (v: infer R) => void ? ComputeQuiet<Quiet, R> : never> & { destroyModal: VoidFunction }) & {
     destroyModal: VoidFunction;
   };
 }
@@ -63,23 +81,7 @@ export interface UseAsyncModalRenderReturn {
   destroy: AsyncModalDestroy;
 }
 
-export interface ContextAsyncModalRender {
-  <D extends AsyncModalProps>(
-    Comp: React.ComponentType<D>,
-    props?: ComputeAsyncModalProps<D>,
-    options?: ContextAsyncModalRenderOptions<D>,
-  ): Promise<D['onOk'] extends (v: infer R) => void ? R : never>;
-}
-
-export interface ContextAsyncModalRenderFactory {
-  <D extends AsyncModalProps>(
-    Comp: React.ComponentType<D>,
-    props?: ComputeAsyncModalProps<D>,
-    options?: ContextAsyncModalRenderOptions<D>,
-  ): () => Promise<D['onOk'] extends (v: infer R) => void ? R : never>;
-}
-
-export type ContextAsyncModalRenderOptions<D> = {
+export type ContextAsyncModalRenderOptions<D, Quiet extends boolean> = {
   /**
    * 状态持久化的key，若不传，则关闭时直接销毁弹窗。
    */
@@ -89,7 +91,26 @@ export type ContextAsyncModalRenderOptions<D> = {
    */
   openField: ExtractBooleanKeys<D>;
   destroyStrategy?: 'hook' | 'context';
+  quiet?: Quiet
 };
+
+export interface ContextAsyncModalRender {
+  <D extends AsyncModalProps, Quiet extends boolean>(
+    Comp: React.ComponentType<D>,
+    props?: ComputeAsyncModalProps<D, Quiet>,
+    options?: ContextAsyncModalRenderOptions<D, Quiet>,
+  ): Promise<D['onOk'] extends (v: infer R) => void ? ComputeQuiet<Quiet, R> : never>;
+}
+
+export interface ContextAsyncModalRenderFactory {
+  <D extends AsyncModalProps, Quiet extends boolean>(
+    Comp: React.ComponentType<D>,
+    props?: ComputeAsyncModalProps<D, Quiet>,
+    options?: ContextAsyncModalRenderOptions<D, Quiet>,
+  ): () => Promise<D['onOk'] extends (v: infer R) => void ? ComputeQuiet<Quiet, R> : never>;
+}
+
+type ComputeQuiet <Quiet extends boolean, R> = Quiet extends true ? (R | undefined) : R
 
 export interface AsyncModalContext {
   render: ContextAsyncModalRender;

@@ -16,6 +16,11 @@ export default () => {
         placeholder: '例如：张三',
       });
       setResult(`输入弹窗 - 结果: ${res}`);
+      // const res2 = await asyncModalRender(InputModal, {
+      //   title: '请输入姓名',
+      //   placeholder: '例如：张三',
+      //   onCancel: () => {}
+      // }, undefined, { quiet: true });
     } catch (error) {
       setResult('输入弹窗 - 取消');
     }
