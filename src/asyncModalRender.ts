@@ -9,7 +9,7 @@ import type { AsyncModalProps, ComputeAsyncModalProps } from './types'
  * @param props 熟悉
  * @param container 挂载的容器
  */
-export function asyncModalRender<D extends AsyncModalProps>(
+export async function asyncModalRender<D extends AsyncModalProps>(
   Comp: React.ComponentType<D>,
   props?: ComputeAsyncModalProps<D>,
   container?: Element,
@@ -24,7 +24,7 @@ export function asyncModalRender<D extends AsyncModalProps>(
     document.body.appendChild(realContainer);
     uninstallEffect = () => realContainer!.remove();
   }
-  const uninstall = staticRender(dom, realContainer);
+  const uninstall = await staticRender(dom, realContainer);
   const closeFunc = () => {
     uninstall();
     uninstallEffect();

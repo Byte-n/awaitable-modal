@@ -1,39 +1,44 @@
 import React, { useState } from 'react';
-import { asyncModalRender, AsyncModalProps } from 'async-modal-render';
-import Modal from './Modal';
+import { asyncModalRender, withAsyncModalPropsMapper } from 'async-modal-render';
+import InputModal from './InputModal';
+import CustomModal from './CustomModal';
 
-interface ExampleModalProps extends AsyncModalProps {
-  title: string;
-  content: string;
-}
-
-const ExampleModal: React.FC<ExampleModalProps> = ({ title, content, onOk, onCancel }) => {
-  return (
-    <Modal title={title} onOk={() => onOk?.('confirmed')} onCancel={onCancel}>
-      <p>{content}</p>
-    </Modal>
-  );
-};
+// 适配 CustomModal
+const AdaptedCustomModal = withAsyncModalPropsMapper(CustomModal, ['onSubmit', 'onClose']);
 
 export default () => {
   const [result, setResult] = useState<string>('');
 
-  const handleClick = async () => {
+  const handleInputClick = async () => {
     try {
-      const res = await asyncModalRender(ExampleModal, {
-        title: '提示',
-        content: '这是一个使用 asyncModalRender 的示例',
+      const res = await asyncModalRender(InputModal, {
+        title: '请输入姓名',
+        placeholder: '例如：张三',
       });
-      setResult(`用户点击了确定: ${res}`);
+      setResult(`输入弹窗 - 结果: ${res}`);
     } catch (error) {
-      setResult('用户点击了取消');
+      setResult('输入弹窗 - 取消');
+    }
+  };
+
+  const handleCustomClick = async () => {
+    try {
+      const res = await asyncModalRender(AdaptedCustomModal, {
+        header: '自定义适配弹窗',
+      });
+      setResult(`适配弹窗 - 结果: ${res}`);
+    } catch (error) {
+      setResult('适配弹窗 - 取消');
     }
   };
 
   return (
     <div>
-      <button onClick={handleClick}>打开弹窗</button>
-      {result && <div style={{ marginTop: 16 }}>结果: {result}</div>}
+      <div style={{ marginBottom: 16 }}>
+        <button onClick={handleInputClick} style={{ marginRight: 8 }}>输入弹窗</button>
+        <button onClick={handleCustomClick}>非标准弹窗(适配)</button>
+      </div>
+      {result && <div>操作结果: {result}</div>}
     </div>
   );
 };

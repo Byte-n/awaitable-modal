@@ -8,6 +8,7 @@
     "jsx": "react",
     "baseUrl": "./",
     "target": "ES2015",
+    "module": "ESNext",
     "paths": {
       "@@/*": [
         ".dumi/tmp/*"
@@ -18,7 +19,7 @@
     },
     "lib": [
       "dom",
-      "es5",
+      "es5"
     ]
   },
   "include": [

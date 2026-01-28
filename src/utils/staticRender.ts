@@ -1,37 +1,29 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
+import { ReactElement } from 'react';
 
-/**
- * 安全地获取 createRoot 函数
- * 兼容处理：某些环境下从 'react-dom' 获取，某些需要从 'react-dom/client' 获取
- */
-function getCreateRoot() {
-  if (typeof (ReactDom as any).createRoot === 'function') {
-    return (ReactDom as any).createRoot;
-  }
+async function getReactDom() {
+  const RD: any = await import('react-dom');
+  const version = Number(RD.version?.split('.')[0]);
 
-  try {
-    const client = require('react-dom/client');
+  // 19 版本
+  if (version && !isNaN(version) && version >= 19) {
+    const client: any = import('react-dom/client');
     if (client && typeof client.createRoot === 'function') {
-      return client.createRoot;
+      return [RD, client.createRoot];
     }
-  } catch (e) {
-    // 忽略错误
   }
 
-  return null;
+  // 小于19 版本
+  if (typeof (RD as any).createRoot === 'function') {
+    return [RD, (RD as any).createRoot];
+  }
+  return [RD];
 }
 
-const createRootFn = getCreateRoot();
-
 /**
- * 挂载 React 元素到指定容器，并返回卸载函数
- */
-export function staticRender(
-  element: React.ReactElement,
-  container: Element,
-): () => void {
-
+* 挂载 React 元素到指定容器，并返回卸载函数
+*/
+export async function staticRender(element: ReactElement, container: Element): Promise<() => void> {
+  const [RD, createRootFn] = await getReactDom();
   if (createRootFn) {
     // React 18 & 19+ 逻辑
     const existingRoot = (container as any).__reactCompatRoot;
@@ -54,17 +46,16 @@ export function staticRender(
         delete (container as any).__reactCompatRoot;
       }
     };
-  } else {
-    // React 16/17 逻辑
-    // React 19 已经彻底删除了 ReactDom.render
-    const legacyRender = (ReactDom as any).render;
-    if (typeof legacyRender === 'function') {
-      legacyRender(element, container);
-      return () => {
-        (ReactDom as any).unmountComponentAtNode(container);
-      };
-    } else {
-      throw new Error('当前 React 版本不支持 render 或 createRoot，请检查依赖。');
-    }
   }
+
+  // React 16/17 逻辑
+  // React 19 已经彻底删除了 ReactDom.render
+  if (typeof RD.render === 'function') {
+    RD.render(element, container);
+    return () => {
+      RD.unmountComponentAtNode(container);
+    };
+  }
+
+  throw new Error('当前 React 版本不支持 render 或 createRoot，请检查依赖。');
 }

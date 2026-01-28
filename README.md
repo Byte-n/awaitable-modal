@@ -159,3 +159,11 @@ async function deleteUser(userId) {
 就是这么简单！不需要状态管理，不需要回调地狱，只需要简单的 async/await 流程。
 
 更多用法见：[文档](https://byte-n.github.io/async-modal-render)
+
+
+## TODO
+
+* [ ] `useAsyncModalRenderContext` 的 `render` / `renderFactory` 的 `AsyncModalRenderOptions` 添加 `destroyStrategy?: 'hook' | 'context'`
+  * `hook`: `useAsyncModalRenderContext` 当前组件卸载后销毁
+  * `context`: `useAsyncModalRenderContext` 当前组件卸载后不销毁, 随着 `AsyncModalRenderProvider` 销毁
+* [ ] 支持类组件的 Context 环境调用

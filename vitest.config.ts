@@ -6,6 +6,7 @@ import commonjs from 'vite-plugin-commonjs'
 export default defineConfig({
   plugins: [react(), commonjs()],
   test: {
+    testTimeout: 3000,
     globals: true,
     browser: {
       enabled: true,

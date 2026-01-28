@@ -8,8 +8,6 @@ interface AsyncModalOptions {
   onClose: VoidFunction
 }
 
-let incrKey = 1;
-
 /**
  * 弹窗入参、交互、创建的统一实现
  * @param Comp
@@ -34,7 +32,7 @@ export function asyncModalRenderImp<D extends AsyncModalProps>(
       reject(realError);
       props?.onCancel?.(realError);
     };
-    dom = <Comp {...(props as ComponentProps<typeof Comp>)} key={incrKey++} onOk={onOk} onCancel={onCancel} />;
+    dom = <Comp {...(props as ComponentProps<typeof Comp>)} onOk={onOk} onCancel={onCancel} />;
   });
   return [dom!, promise];
 }
