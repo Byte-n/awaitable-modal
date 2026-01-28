@@ -167,3 +167,4 @@ async function deleteUser(userId) {
   * `hook`: `useAsyncModalRenderContext` 当前组件卸载后销毁
   * `context`: `useAsyncModalRenderContext` 当前组件卸载后不销毁, 随着 `AsyncModalRenderProvider` 销毁
 * [ ] 支持类组件的 Context 环境调用
+* [ ] `UseAsyncModalRenderReturn` 添加一个 `renderQuiet`/`renderSafe` 函数。此函数在 `onCancel` 时不抛出错误，直接返回 `undefined`
