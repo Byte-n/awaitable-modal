@@ -1,5 +1,7 @@
 # API
 
+## static
+
 ### asyncModalRender
 
 直接将组件渲染到指定容器元素下。
@@ -31,6 +33,8 @@ function asyncModalRender<D extends AsyncModalProps, Quiet extends boolean>(
 
 ---
 
+## hook
+
 ### useAsyncModalRender
 
 在组件内使用的 Hook，返回弹窗渲染相关的方法和元素。
@@ -53,6 +57,8 @@ function useAsyncModalRender(): UseAsyncModalRenderReturn
 | destroy | `AsyncModalDestroy` | 销毁持久化弹窗的函数 |
 
 ---
+
+## render
 
 ### AsyncModalRender
 
@@ -167,6 +173,8 @@ type RenderFactory <D extends AsyncModalProps, Quiet extends boolean> =
 
 ---
 
+## destroy
+
 ### AsyncModalDestroyOptions
 
 销毁持久化弹窗的配置项。
@@ -185,6 +193,8 @@ interface AsyncModalDestroyOptions {
 ```
 
 ---
+
+## Context
 
 ### AsyncModalRenderProvider
 
@@ -219,7 +229,7 @@ type ContextAsyncModalRenderOptions<D, Quiet extends boolean> = AsyncModalRender
 
 ---
 
-### AsyncModalProps
+## AsyncModalProps
 
 弹窗组件需要继承的基础属性接口。
 所有通过 async-modal-render 调用的组件都应该符合此接口（或通过 mapper 适配）。
@@ -233,7 +243,7 @@ interface AsyncModalProps {
 
 ---
 
-### ComputeAsyncModalProps
+## ComputeAsyncModalProps
 
 计算后的组件属性类型，使 `onOk` 和 `onCancel` 变为可选。
 
@@ -245,6 +255,7 @@ export type ComputeAsyncModalProps<D extends AsyncModalProps> =
 
 ---
 
+## 错误类
 ### AsyncModalRenderCancelError
 
 用户取消操作时抛出的错误类（仅在非 quiet 模式下抛出）。
@@ -269,7 +280,7 @@ export class PersistentComponentConflictError extends Error {
 
 ---
 
-### withAsyncModalPropsMapper
+## withAsyncModalPropsMapper
 
 属性映射高阶组件，用于适配具有不同 `onOk`/`onCancel` 命名规范的组件。
 

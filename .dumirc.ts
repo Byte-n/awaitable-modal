@@ -19,6 +19,9 @@ export default defineConfig({
       { title: 'API', link: '/api' },
       { title: '更新日志', link: '/changelogs' },
     ],
+    loading: {
+      skeleton: ['/index', '/guide', '/components', './api'],
+    },
     footer:
       'Made with<span style="color: rgb(255, 255, 255);">❤</span>by <span>Byte-n | Copyright © 2025-present</span>',
     github: 'https://github.com/Byte-n/async-modal-render',
@@ -73,9 +76,6 @@ export default defineConfig({
         details: '可将任意 React 组件转换为异步模态框，高度灵活可定制',
       },
     ],
-    loading: {
-      skeleton: ['/index', '/guide', '/components'],
-    },
     footerLinks: [
       {
         title: '相关资源',
