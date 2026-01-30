@@ -6,6 +6,11 @@
 
 直接将组件渲染到指定容器元素下。
 这是一个独立的工具函数，不需要依赖 Context 或 Hook。
+底层会根据 React 版本自动选择合适的渲染方式：
+
+- React 19+：通过 `react-dom/client` 的 `createRoot` 渲染。
+- React 18：优先使用 `createRoot`，并复用挂载在容器上的 root。
+- React 16/17：回退到 `ReactDOM.render` / `unmountComponentAtNode`。
 
 ```typescript
 function asyncModalRender<D extends AsyncModalProps, Quiet extends boolean>(
@@ -21,9 +26,9 @@ function asyncModalRender<D extends AsyncModalProps, Quiet extends boolean>(
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | Comp | `React.ComponentType<D>` | - | 需要渲染的组件 |
-| props | `ComputeAsyncModalProps<D>` | - | 组件的属性（不包含 onOk 和 onCancel，或使其可选） |
-| container | `Element` | `document.body` | 挂载的容器元素。如果不传，则会创建一个 div 挂载到 body 下，并在关闭后移除。 |
-| options | `{ quiet: boolean }` | - | 配置项，支持 quiet 模式 |
+| props | `ComputeAsyncModalProps<D>` | - | 组件的属性（`onOk` / `onCancel` 会被自动注入，可不传） |
+| container | `Element` | `document.body` | 挂载的容器元素。如果不传，则会创建一个 div 挂载到 body 下，并在关闭后移除（同时销毁 Root）。 |
+| options | `{ quiet: boolean }` | - | 配置项，支持静默模式（取消时不抛错） |
 
 **返回值：**
 
@@ -95,15 +100,21 @@ interface AsyncModalRender {
 ```typescript
 type AsyncModalRenderOptions<D, Quiet extends boolean> = {
   /**
-   * 状态持久化的key，若不传，则关闭时直接销毁弹窗。
+   * 状态持久化的 key（需要同时传入 openField 才生效）
+   * 若传入此 key，弹窗关闭后不会销毁，而是隐藏；下次使用相同 key 打开时会恢复状态。
+   * 若不传，则关闭时直接销毁弹窗。
    */
   persistent?: string;
   /**
-   * 控制弹窗展示隐藏的prop key
+   * persistent 时控制弹窗展示/隐藏的 prop key
+   * 必须是组件 props 中类型为 boolean 的字段名
+   * 配合 persistent 使用，用于控制持久化弹窗的显隐
    */
   openField?: ExtractBooleanKeys<D>;
   /**
-   * 是否开启安静模式。开启后，取消弹窗不会抛出 AsyncModalRenderCancelError，而是 resolve undefined。
+   * 是否开启静默模式
+   * 若为 true，点击取消时不会抛出 AsyncModalRenderCancelError，而是 resolve undefined
+   * 默认为 false
    */
   quiet?: Quiet;
 }
@@ -182,11 +193,15 @@ type RenderFactory <D extends AsyncModalProps, Quiet extends boolean> =
 ```typescript
 interface AsyncModalDestroyOptions {
   /**
-   * 状态持久化的key，若不传，则关闭销毁所有持久化的弹窗。
+   * 要销毁的持久化弹窗的 key
+   * 若不传，则根据 visibility 筛选或销毁所有
    */
   persistent?: string;
   /**
-   * 可见性筛选，若不传，则默认筛选所有弹窗。
+   * 可见性筛选
+   * - visible: 仅销毁当前可见的弹窗
+   * - hidden: 仅销毁当前隐藏的弹窗
+   * 若不传，则不筛选可见性
    */
   visibility?: 'visible' | 'hidden';
 }

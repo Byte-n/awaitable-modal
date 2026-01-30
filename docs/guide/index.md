@@ -15,7 +15,20 @@
 
 ## 基本使用
 
-### 创建 Modal 组件
+支持一下几种使用方式：
+* 弹窗组件 `props` 符合 `AsyncModalProps` 规范，直接通过 `render` 函数渲染。
+* 业务已有的组件 `props` 不符 `AsyncModalProps` 规范，直接通过 `withAsyncModalPropsMapper` + `render` 函数渲染。
+
+`render` 函数分类有：
+* `asyncModalRender`: 直接将组件渲染到指定容器元素下
+* hook `useAsyncModalRender` / `useAsyncModalRenderContext`
+  * `render`：基础渲染函数，支持 `renderQuiet`、`renderPersistent` 的全部功能。
+  * `renderQuiet`：`render` 的套壳，静默渲染函数，`render` 在回调 `onCancel` 触发后会 reject，而 `renderQuiet` 会 resolve `undefined` 
+  * `renderPersistent`：`render` 的套壳，状态持久化，即在 `onCancel` 触发后，不卸载实例，仅改变控制弹窗可见性的 prop 值
+
+`factory` 工厂函数：`renderFactory` / `renderQuietFactory` / `renderPersistentFactory` 创建对应 `render` 函数的闭包函数
+
+### 使用 asyncModalRender
 
 创建一个符合 `AsyncModalProps` 接口的 Modal 组件。你的组件需要接收 `onOk` 和 `onCancel` 两个回调函数：
 
@@ -24,7 +37,8 @@ import React from 'react';
 import { AsyncModalProps } from 'async-modal-render';
 
 interface ConfirmModalProps extends AsyncModalProps {
-  ...
+  onOk?: (v: string) => void;
+  onCancel?: () => void
 }
 
 const ConfirmModal = ({ ..., onOk, onCancel }: ConfirmModalProps) => {
@@ -42,12 +56,7 @@ const ConfirmModal = ({ ..., onOk, onCancel }: ConfirmModalProps) => {
 export default ConfirmModal;
 ```
 
-**关键点**：
-- 继承 `AsyncModalProps` 接口
-- 在适当的时机调用 `onOk()` 或 `onCancel()`
-- `onOk()` 的参数会作为 Promise 的返回值
-
-### 使用 asyncModalRender
+使用
 
 
 ```tsx ｜ pure
@@ -60,16 +69,14 @@ async function handleDelete() {
       title: '确认删除',
       content: '此操作不可恢复，确定要删除吗？'
     });
-
     console.log('用户确认:', result); // 'confirmed'
-    // 执行删除操作
-    await deleteItem();
-    alert('删除成功！');
+    ...
   } catch (error) {
     console.log('用户取消了操作');
   }
 }
 ```
+
 ### 使用已有的组件
 
 业务中已有的弹窗组件的props定义可能不一致。此时就需要使用 `withAsyncModalPropsMapper` 高阶组件处理 `props` 的映射。这样就可以在不改动原本组件的情况下使用。
@@ -122,7 +129,7 @@ async function publishArticle() {
 }
 ```
 
-### 错误区分
+## 错误区分
 
 使用 `AsyncModalRenderCancelError` 区分用户取消和其他错误：
 
