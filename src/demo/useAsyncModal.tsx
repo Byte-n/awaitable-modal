@@ -118,7 +118,7 @@ export default () => {
   // 适配的自定义弹窗
   const handleCustomClick = async () => {
     try {
-      const res = await renderPersistent(withAsyncModalPropsMapper(CustomModal, ['onSubmit', 'onClose']), {
+      const res = await renderPersistent(AdaptedCustomModal, {
         header: 'Hook 模式适配弹窗',
         visible: true,
       }, { persistent: 'a', openField: 'visible' });

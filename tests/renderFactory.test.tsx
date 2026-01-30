@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
-import { useAsyncModalRender, AsyncModalProps } from '../dist'
+import { useAsyncModalRender, AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 
@@ -85,5 +85,32 @@ describe('renderFactory', () => {
     // Check if it behaves quietly (e.g. we could cancel it, but here we just check it works)
     await page.getByTestId('ok-button').click()
     await expect.poll(() => onSuccess.mock.calls.length).toBe(1)
+  })
+
+  it('renderFactory.destroyModal 应销毁工厂创建的所有实例', async () => {
+    const App = () => {
+      const { renderFactory, holder } = useAsyncModalRender()
+      const openModal = renderFactory(TestModal, { title: 'Bulk' })
+      const openTwice = async () => {
+        openModal()
+        openModal()
+      }
+      const destroyAll = () => openModal.destroyModal()
+      return (
+        <div>
+          <button data-testid="open-twice" onClick={openTwice}>Open Twice</button>
+          <button data-testid="destroy-all" onClick={destroyAll}>Destroy All</button>
+          {holder}
+        </div>
+      )
+    }
+    await render(<App />)
+    await page.getByTestId('open-twice').click()
+    const bulkNodesBefore = document.querySelectorAll('[data-testid="test-modal"] h1[data-testid="modal-title"]').length
+    expect(bulkNodesBefore).toBeGreaterThanOrEqual(2)
+    await page.getByTestId('destroy-all').click()
+    const bulkNodesAfter = Array.from(document.querySelectorAll('[data-testid="test-modal"] h1[data-testid="modal-title"]'))
+      .filter(el => el.textContent?.includes('Bulk')).length
+    expect(bulkNodesAfter).toBe(0)
   })
 })

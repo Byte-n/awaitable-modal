@@ -113,7 +113,10 @@ const usePatchElement = (): [Ele[], PatchElement, RemoveElement, GetElement] => 
         }
 
         // 检查可见性
-        if (visibility && item.openField !== undefined && item.openField !== null) {
+        if (visibility) {
+          if (item.openField === null || item.openField === undefined) {
+            return true;
+          }
           const isOpen = item.element.props[item.openField];
           if (visibility === 'visible' && !isOpen) return true;
           if (visibility === 'hidden' && isOpen) return true;

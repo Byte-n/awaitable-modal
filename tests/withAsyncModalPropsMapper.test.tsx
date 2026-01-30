@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import React from 'react'
-import { withAsyncModalPropsMapper, asyncModalRender } from '../dist'
+import { withAsyncModalPropsMapper, asyncModalRender } from '../src'
 import { page } from 'vitest/browser'
 
 interface CustomModalProps {
@@ -68,5 +68,18 @@ describe('withAsyncModalPropsMapper', () => {
     const Mapped2 = withAsyncModalPropsMapper(OtherModal, ['confirm', 'close'])
     
     expect(Mapped1).not.toBe(Mapped2)
+  })
+
+  it('Mapper 不会继承原组件的 name/displayName', () => {
+    function OriginalModal(_props: CustomModalProps) {
+      return null
+    }
+    OriginalModal.displayName = 'OriginalModal'
+
+    const Mapped = withAsyncModalPropsMapper(OriginalModal, ['confirm', 'close'])
+
+    expect(Mapped).not.toBe(OriginalModal)
+    expect(Mapped.name).not.toBe(OriginalModal.name)
+    expect((Mapped as any).displayName).not.toBe(OriginalModal.displayName)
   })
 })

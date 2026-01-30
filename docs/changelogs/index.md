@@ -1,5 +1,27 @@
 # 更新日志
 
+## 0.1.2
+
+`2026-01-30`
+
+### 修复
+ - 修复 React 19 兼容性问题：
+   - 在 `staticRender` 中新增对 `react-dom/client` 的动态按需导入（`await import('react-dom/client')`），在检测到 React 19+ 环境时优先使用 `createRoot`，从而在 React 19 中也可以正常使用本库。
+
+### 测试与稳定性
+
+- 完成测试用例在**语句、分支路径、源码行**维度的 100% 覆盖（核心实现代码 `src/**/*.{ts,tsx}`），显著提升库的整体稳定性与回归信心。
+- 补充 `useAsyncModalRender` 在持久化场景下的多种边界测试，包括：
+  - `persistent` Key 支持 `number` / `symbol` 等多种类型；
+  - 持久化关闭后，历史 `destroyModal` 不会误删已经 patch 的元素，需通过 `destroy` 显式清理；
+  - 在不传 `props` 的情况下，`render` 能自动使用空对象并正常 resolve。
+- 补充 `withAsyncModalPropsMapper` 的行为测试，确保：
+  - 从 `../src` 而非打包产物 `../dist` 进行导入，保证单测对源码的直接约束；
+  - Mapped 组件不会继承原组件的 `name` / `displayName`，避免在调试与 DevTools 中造成组件混淆。
+- 为 `asyncModalRender`、`AsyncModalRenderContext` 等核心 API 增加了更多浏览器端交互测试，验证取消行为、销毁策略和工厂函数在复杂场景下的表现。
+
+
+
 ## 0.1.1
 
 `2026-01-29`

@@ -1,6 +1,6 @@
 {
   "name": "async-modal-render",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A lightweight library that promisifies React modal operations, allowing elegant handling of modal interactions using async/await syntax",
   "keywords": [
     "react",
@@ -51,7 +51,7 @@
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "commitlint": {
     "extends": [
@@ -80,6 +80,7 @@
     "@umijs/lint": "^4.0.0",
     "@vitejs/plugin-react": "^4.4.1",
     "@vitest/browser-playwright": "^4.0.0-beta.17",
+    "@vitest/coverage-v8": "^4.0.18",
     "dumi": "^2.4.13",
     "eslint": "^8.23.0",
     "father": "^4.1.0",

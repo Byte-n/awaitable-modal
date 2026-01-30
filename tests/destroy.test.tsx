@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, renderHook } from 'vitest-browser-react';
 import { page } from 'vitest/browser'
-import { AsyncModalProps, useAsyncModalRender } from '../dist';
+import { AsyncModalProps, useAsyncModalRender } from '../src';
 import { expect, it, describe } from 'vitest';
 
 const TestModal: React.FC<AsyncModalProps & { title: string; open?: boolean }> = ({ title, open, onOk }) => {
@@ -86,4 +86,49 @@ describe('useAsyncModalRender destroy', () => {
     await expect.element(page.getByText('Modal 1')).not.toBeInTheDocument();
     await expect.element(page.getByText('Modal 2')).not.toBeInTheDocument();
   });
+
+  it('removeElement 传 persistent 不匹配时不删除其他实例', async () => {
+    const { result } = await renderHook(() => useAsyncModalRender());
+    const { render: renderModal, holder, destroy } = result.current;
+    await render(<div>{holder}</div>);
+    renderModal(TestModal, { title: 'Keep Me' }, { persistent: 'keep', openField: 'open' });
+    renderModal(TestModal, { title: 'Remove Me' }, { persistent: 'remove', openField: 'open' });
+    await expect.element(page.getByText('Keep Me')).toBeInTheDocument();
+    await expect.element(page.getByText('Remove Me')).toBeInTheDocument();
+    destroy({ persistent: 'remove' });
+    await expect.element(page.getByText('Keep Me')).toBeInTheDocument();
+    await expect.element(page.getByText('Remove Me')).not.toBeInTheDocument();
+  })
+
+  it('destroy 对非持久化元素不做处理', async () => {
+    const { result } = await renderHook(() => useAsyncModalRender());
+    const { render: renderModal, holder, destroy } = result.current;
+    await render(<div>{holder}</div>);
+    const NonPersistent: React.FC<AsyncModalProps & { title: string }> = ({ title, onOk }) => (
+      <div data-testid="np-modal">
+        <h1 data-testid="modal-title">{title}</h1>
+        <button data-testid="ok-button" onClick={() => onOk?.()}>OK</button>
+      </div>
+    );
+    renderModal(NonPersistent, { title: 'NP' });
+    await expect.element(page.getByTestId('np-modal')).toBeInTheDocument();
+    destroy({});
+    await expect.element(page.getByTestId('np-modal')).toBeInTheDocument();
+  })
+
+  it('visibility 过滤但 openField 缺失时默认不删除', async () => {
+    const { result } = await renderHook(() => useAsyncModalRender());
+    const { render: renderModal, holder, destroy } = result.current;
+    await render(<div>{holder}</div>);
+    const NoOpenField: React.FC<AsyncModalProps & { title: string }> = ({ title, onOk }) => (
+      <div data-testid="no-open-field">
+        <h1 data-testid="modal-title">{title}</h1>
+        <button data-testid="ok-button" onClick={() => onOk?.()}>OK</button>
+      </div>
+    );
+    renderModal(NoOpenField, { title: 'NoOF' }, { persistent: 'noof' });
+    await expect.element(page.getByTestId('no-open-field')).toBeInTheDocument();
+    destroy({ persistent: 'noof', visibility: 'visible' });
+    await expect.element(page.getByTestId('no-open-field')).toBeInTheDocument();
+  })
 });

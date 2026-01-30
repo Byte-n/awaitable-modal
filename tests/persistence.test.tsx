@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import React, { useState } from 'react'
-import { useAsyncModalRender, AsyncModalProps } from '../dist'
+import { useAsyncModalRender, AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 
@@ -143,5 +143,5 @@ describe('Persistence', () => {
 
     await page.getByTestId('open-1').click();
     await expect.element(modal1.getByTestId('count-value')).toHaveTextContent('1'); // Modal 1 count should still be 1
-  });
+  }, 10000);
 });

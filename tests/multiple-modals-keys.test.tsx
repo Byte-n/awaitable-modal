@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import React, { useEffect } from 'react'
-import { useAsyncModalRender, type AsyncModalProps } from '../dist'
+import { useAsyncModalRender, type AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 

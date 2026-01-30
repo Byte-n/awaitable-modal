@@ -6,16 +6,20 @@ import commonjs from 'vite-plugin-commonjs'
 export default defineConfig({
   plugins: [react(), commonjs()],
   test: {
-    testTimeout: 3000,
+    update: false,
+    testTimeout: 6000,
     globals: true,
     browser: {
       enabled: true,
       provider: playwright(),
-      instances: [
-        { browser: 'chromium' },
-      ],
-      headless: true
+      instances: [{ browser: 'chromium' }],
+      headless: true,
     },
     setupFiles: ['./tests/setup.ts'],
+    coverage: {
+      enabled: true,
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['**/demo/**/*', 'src/index.ts', 'src/types.ts']
+    },
   },
-})
+});

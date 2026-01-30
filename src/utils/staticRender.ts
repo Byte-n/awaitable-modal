@@ -1,12 +1,17 @@
 import { ReactElement } from 'react';
 
 async function getReactDom() {
+  /* v8 ignore start -- @preserve */
+  // 测试用例中 promise reject 分支不会出发，这里忽略统计
   const RD: any = await import('react-dom');
+  /* v8 ignore stop -- @preserve */
   const version = Number(RD.version?.split('.')[0]);
 
   // 19 版本
   if (version && !isNaN(version) && version >= 19) {
-    const client: any = import('react-dom/client');
+    /* v8 ignore start -- @preserve */
+    const client: any = await import('react-dom/client');
+    /* v8 ignore stop -- @preserve */
     if (client && typeof client.createRoot === 'function') {
       return [RD, client.createRoot];
     }

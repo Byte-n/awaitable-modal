@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import React, { useState } from 'react'
-import { withAsyncModalPropsMapper, useAsyncModalRender, PersistentComponentConflictError } from '../dist'
+import { withAsyncModalPropsMapper, useAsyncModalRender, PersistentComponentConflictError } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 

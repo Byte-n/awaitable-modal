@@ -75,6 +75,10 @@ export default defineConfig({
         title: '灵活组件化',
         details: '可将任意 React 组件转换为异步模态框，高度灵活可定制',
       },
+      {
+        title: '测试覆盖率 100%',
+        details: '测试用例在语句、分支路径、源码行维度实现 100% 覆盖，显著降低回归风险，增强版本发布信心',
+      },
     ],
     footerLinks: [
       {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import React, { useState } from 'react'
-import { useAsyncModalRender, AsyncModalProps } from '../dist'
+import { useAsyncModalRender, AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 
@@ -64,6 +64,9 @@ describe('renderPersistent', () => {
           <button data-testid="open-factory" onClick={openModal}>
             Open Factory
           </button>
+          <button data-testid="destroy-factory" onClick={openModal.destroyModal}>
+            Destroy Factory
+          </button>
           {holder}
         </div>
       );
@@ -85,5 +88,9 @@ describe('renderPersistent', () => {
     
     // 4. State should be preserved
     await expect.element(page.getByTestId('count-value')).toHaveTextContent('1');
+
+    // 5. Destroy all instances created by factory
+    await page.getByTestId('destroy-factory').click();
+    await expect.element(page.getByTestId('persistent-modal')).not.toBeInTheDocument();
   });
 });

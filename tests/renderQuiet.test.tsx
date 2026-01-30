@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
-import { useAsyncModalRender, AsyncModalRenderCancelError } from '../dist'
-import type { AsyncModalProps } from '../dist'
+import { useAsyncModalRender, AsyncModalRenderCancelError } from '../src'
+import type { AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 import { render } from 'vitest-browser-react'
 

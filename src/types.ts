@@ -32,13 +32,13 @@ export type ComputeAsyncModalProps<D extends AsyncModalProps> =
  */
 export type AsyncModalRenderOptions<D, Quiet extends boolean> = {
   /**
-   * 状态持久化的 key
+   * 状态持久化的 key (需要同时传入openFiled才有效， 建议调用 renderPersistent 获取更好的 ts类型 校验)
    * 若传入此 key，弹窗关闭后不会销毁，而是隐藏，下次使用相同 key 打开时会恢复状态
    * 若不传，则关闭时直接销毁弹窗
    */
   persistent?: string;
   /**
-   * 控制弹窗展示/隐藏的 prop key
+   * persistent 时控制弹窗展示/隐藏的 prop key
    * 必须是组件 props 中类型为 boolean 的字段名
    * 配合 persistent 使用，用于控制持久化弹窗的显隐
    */

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import React from 'react'
-import { asyncModalRender, AsyncModalRenderCancelError } from '../dist'
-import type { AsyncModalProps } from '../dist'
+import { asyncModalRender, AsyncModalRenderCancelError } from '../src'
+import type { AsyncModalProps } from '../src'
 import { page } from 'vitest/browser'
 
 interface TestModalProps extends AsyncModalProps {
@@ -112,5 +112,70 @@ describe('asyncModalRender', () => {
     await expect(promise).resolves.toBe('confirmed')
     expect(onOk).toHaveBeenCalledTimes(1)
     expect(onOk).toHaveBeenCalledWith('confirmed')
+  })
+
+  it('不传 container 时应自动创建容器，关闭后容器被移除', async () => {
+    const promise = asyncModalRender(TestModal, { title: 'Auto Container' })
+    await expect.element(page.getByTestId('test-modal').filter({ hasText: 'Auto Container' })).toBeInTheDocument()
+    const modalEl = document.querySelector('[data-testid="test-modal"]') as HTMLElement
+    expect(modalEl).toBeTruthy()
+    const parentContainer = modalEl.parentElement as HTMLElement
+    await page.getByTestId('test-modal').filter({ hasText: 'Auto Container' }).getByTestId('ok-button').click()
+    await promise
+    expect(parentContainer.isConnected).toBe(false)
+  })
+
+  it('传入 quiet=true 时，取消应 resolve undefined 且 props.onCancel 不传错误', async () => {
+    const onCancel = vi.fn()
+    const promise = asyncModalRender(TestModal, { title: 'Quiet Cancel', onCancel }, undefined, { quiet: true })
+    await page.getByTestId('test-modal').filter({ hasText: 'Quiet Cancel' }).getByTestId('cancel-button').click()
+    const result = await promise
+    expect(result).toBeUndefined()
+    expect(onCancel).toHaveBeenCalledTimes(1)
+    expect(onCancel).toHaveBeenCalledWith()
+  })
+
+  it('传入外部 container 时，关闭后不应移除该容器', async () => {
+    const external = document.createElement('div')
+    document.body.appendChild(external)
+    const promise = asyncModalRender(TestModal, { title: 'External Container' }, external)
+    await page.getByTestId('test-modal').filter({ hasText: 'External Container' }).getByTestId('ok-button').click()
+    await promise
+    expect(external.isConnected).toBe(true)
+    external.remove()
+  })
+
+  it('onOk 回调多个参数时，Promise 应以第一个参数 resolve', async () => {
+    const onOkSpy = vi.fn()
+    const MultiArgsModal: React.FC<TestModalProps> = ({ title, onOk }) => {
+      return (
+        <div data-testid="test-modal">
+          <h1 data-testid="modal-title">{title}</h1>
+          <button data-testid="ok-button" onClick={() => onOk?.(1, 2, 3)}>OK</button>
+        </div>
+      )
+    }
+    const promise = asyncModalRender(MultiArgsModal, { title: 'Multi Args', onOk: onOkSpy }, container)
+    await page.getByTestId('test-modal').filter({ hasText: 'Multi Args' }).getByTestId('ok-button').click()
+    const result = await promise
+    expect(result).toBe(1)
+    expect(onOkSpy).toHaveBeenCalledWith(1, 2, 3)
+  })
+
+  it('不传 props 时应使用空对象并正常渲染', async () => {
+    const MinimalModal: React.FC<AsyncModalProps> = ({ onOk }) => {
+      return (
+        <div data-testid="minimal-modal">
+          <button data-testid="minimal-ok" onClick={() => onOk?.('ok')}>
+            OK
+          </button>
+        </div>
+      )
+    }
+
+    const promise = asyncModalRender(MinimalModal, undefined, container)
+    await expect.element(page.getByTestId('minimal-modal')).toBeInTheDocument()
+    await page.getByTestId('minimal-ok').click()
+    await expect(promise).resolves.toBe('ok')
   })
 })
